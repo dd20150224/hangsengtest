@@ -1,0 +1,7 @@
+{
+    "realm": "hangsengtest-realm",
+    "auth-server-url": "https://keycloak.wowstk.com",
+    "ssl-required": "external",
+    "resource": "bookBox",
+    "public-client": true
+}

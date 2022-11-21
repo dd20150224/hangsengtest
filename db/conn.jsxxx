@@ -1,0 +1,40 @@
+// import dotenv from 'dotenv';
+// dotenv.config();
+
+import { MongoClient } from 'mongodb';
+const url = process.env.MONGODB_URI;
+// const client = new MongoClient(connectionString, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+let dbConnection;
+console.log('url = ' + url);
+const connectToServer = (callback) => {
+    MongoClient.connect(url, function (err, db) {
+        if (err || !db) {
+            console.log('connectToServer: err: ', err);
+            return callback(err);
+        }
+        
+        try {
+            dbConnection = db.db("bankapi");
+            // console.log('dbConnection: ', dbConnection);
+            console.log("Successfully connected to BankAPI DB.");
+            return callback();
+    
+        } catch(err) {
+            console.log('connect err: ', err);
+        }
+    });
+};
+
+const getDb = () => {
+    // console.log('getDb: dbConnection: ', dbConnection);
+    return dbConnection;
+};
+
+export {
+    connectToServer,
+    getDb
+};
